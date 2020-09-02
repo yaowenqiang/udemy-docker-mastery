@@ -22,3 +22,21 @@
 > docker network ls
 > docker network inspect
 > docker network create --driver
+> docker network connect
+> docker network disconnect
+
+> docker network inspect bridge 
+
+> docker network create my_app_net
+> docker network connect networkName containerName
+
+
+> docker network create dude
+> docker run -d  --net dude --net-alias search elasticsearch:2
+> docker run -d  --net dude --net-alias search elasticsearch:2
+> docker run --rm  --net dude  alpine nslookup search
+. docker run --rm  --net dude centos curl -s search:9200
+
+
+
+
