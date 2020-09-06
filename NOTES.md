@@ -38,5 +38,14 @@
 . docker run --rm  --net dude centos curl -s search:9200
 
 
+> http://jasonwilder.com/blog/2014/03/25/automated-nginx-reverse-proxy-for-docker/
+
+> https://github.com/docker-library/official-images
+
+
+> docker history nginx
+
+> copy on write
+
 
 

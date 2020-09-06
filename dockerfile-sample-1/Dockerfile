@@ -4,6 +4,16 @@
 #       to match the latest standards from docker hub... but it's doing the same thing as the video
 #       describes
 FROM debian:stretch-slim
+RUN echo \
+    deb http://mirrors.aliyun.com/debian/ stretch main non-free contrib\
+    deb-src http://mirrors.aliyun.com/debian/ stretch main non-free contrib\
+    deb http://mirrors.aliyun.com/debian-security stretch/updates main\
+    deb-src http://mirrors.aliyun.com/debian-security stretch/updates main\
+    deb http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib\
+    deb-src http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib\
+    deb http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib\
+    deb-src http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib\
+    > /etc/apt/sources.list
 # all images must have a FROM
 # usually from a minimal Linux distribution like debian or (even better) alpine
 # if you truly want to start with an empty container, use FROM scratch
