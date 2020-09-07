@@ -35,3 +35,21 @@
 # Node Docker Good Defaults sample project on GitHub to change this Dockerfile for 
 # better local development with more advanced topics
 # https://github.com/BretFisher/node-docker-good-defaults
+
+FROM node:6-alpine
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+RUN npm config set registry https://registry.npm.taobao.org
+EXPOSE 3000
+
+RUN apk add --update tini
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY package.json package.json
+RUN npm install  && npm cache clean
+COPY . .
+CMD ["tini", "--", "node" , "./bin/www"]
+
+
+
+RUN 
