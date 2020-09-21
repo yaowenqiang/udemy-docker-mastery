@@ -44,8 +44,40 @@
 
 
 > docker history nginx
+> docker history mysql
 
 > copy on write
 
+
+# Docker Swarm
+
++ docker swarm
++ docker node
++ docker service
++ docker stack
++ docker secret
+
+> docker info | grep -i swarm
+
+> docker swarm init
+
+What happened?
+
+ + Lots of PKI and security automation
+   + Root Signing Certificate created for our Swarm
+   + Certificate is issued for first Manager node
+   + Join tokens are created
++ Raft database created to store root CA, configs and secrets
+  + Encrypted by default on disk (1.13+)
+  + No need for another key/value system to hold orchestration/secrets
+  + Replicates logs amongst Managers via mutual TLS in "control plane"
+
+
+> docker node ls
+> docker serivce create alpine ping 8.8.8.8
+> docker service ls
+> docker service ps <name>
+> docker service update <ID> --replicas 3
+> docker update 
 
 
