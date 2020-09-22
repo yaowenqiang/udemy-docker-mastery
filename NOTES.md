@@ -80,4 +80,21 @@ What happened?
 > docker service update <ID> --replicas 3
 > docker update 
 
+> docker ps -q | xargs  docker inspect  --format "{{.Name}}  {{.NetworkSettings.IPAddress}}"
+
+> play-with-docker.com
+> get.docker.com
+
+> docker-machine create node1
+> docker-machien ssh node1
+> docker-machine env node1
+
+> docker swarm init --advertise-addr <IP address>
+> docker node ls
+> docker node update --role manager node2
+> docker swarm join-token manager
+> docker service create --replicas 3 alpine ping 8.8.8.8
+> dockeer node ps node2
+
+
 
