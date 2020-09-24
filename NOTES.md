@@ -96,5 +96,27 @@ What happened?
 > docker service create --replicas 3 alpine ping 8.8.8.8
 > dockeer node ps node2
 
+### Overlay Multi-Host Networking
 
++ Just choose --driver overlay when creating network
++ For container-to-container traffic inside a single Swarm
++ Optional IPSec(AES) encryption on network creation
++ Each service can be connected to multiple networks
+  + (e.g, front-end, back-end)
+
+
+> docker network create --driver overlay mydrupal
+> docker service create --name psql --network mydrupal -e  POSTGRES_PASSWORD=mypass postgres
+> docker service create --name drupal --network mydrupal -p 80:80 drupal
+> watch docker service ls
+
+### Routing Mesh
+
++ Routing ingress(incoming) packets for a Service to proper Task
++ Spans all nodes in Swarm
++ Uses IPVS from Linux Kernel
++ Load balances Swarm Services across their Tasks
++ Two ways this works:
+  + Container-to-container in a Overlay network(uses VIP)
+  + External traffic incoming to published pots(all nodes listen)
 
