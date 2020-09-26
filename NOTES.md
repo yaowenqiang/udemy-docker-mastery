@@ -61,6 +61,20 @@
 
 > docker swarm init
 
+
+## Manager Node
+
++ API -> Accepts command from client and creates service object
++ Orchstrator -> Reconciliation loop for service objects and create tasks
++ Allocator -> Allocates IP addresses to tasks
++ Scheduler -> Assigns nodes to tasks
++ Dispatcher -> Checks in on workers
+
+## Worker Node
+
++ Worker -> Connects to dispatcher to check on assigned tasks
++ Executor -> Executes the tasks assigned to worker node
+
 What happened?
 
  + Lots of PKI and security automation
@@ -109,6 +123,12 @@ What happened?
 > docker service create --name psql --network mydrupal -e  POSTGRES_PASSWORD=mypass postgres
 > docker service create --name drupal --network mydrupal -p 80:80 drupal
 > watch docker service ls
+
+>   "registry-mirrors": ["https://dt0991li.mirror.aliyuncs.com"]
+
+
+> https://jmkhael.io/deploying-play-with-docker-com-on-my-machine/
+> https://github.com/nicolaka/netshoot
 
 ### Routing Mesh
 
