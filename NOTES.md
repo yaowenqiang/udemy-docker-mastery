@@ -120,3 +120,69 @@ What happened?
   + Container-to-container in a Overlay network(uses VIP)
   + External traffic incoming to published pots(all nodes listen)
 
+
+
+## Container Registries Image Storage and Distribution
+
+###  Docker Hub ( auto build)
+###  Docker Store
+###  Docker cloud
+
++ Web-based Docker Swarm creation/management
++ Uses popular cloud hosters and bring-your-own-server
++ Automated image building, testing, and deployment
++ More advanced than what Docker Hub does for free
++ Includes a image security scanning service
+
+### Docker Registry
+
+
+> https://github.com/docker/distribution
+> https://hub.docker.com/_/registry
+
+
+#### Running Docker Registry
+
++ A private image registry for your network
++ Part of the docker/distribution github repo
++ the de facto in private container registries
++ Not as full featured as Hub or others, no web UI, basic auth only
++ As its core: a web API and storage system, written in GO
++ Storage supports locak, s3/Azure/Alibaba/Google Cloud, and OpenStack Swift
+
+#### Running Docker Registry Cont.
+
++ Look in section resources for links to:
++ Secure your Registry with TLS
++ Storage cleanup via Garbage Collection
++ Enable Hub caching via "--registry-mirror"
+
+### Run a Private Docker Registry
+
++ Run the registry image on default port 5000
++ Re-tag an existing image and push it to your new registry
++ Remove that image from local cache and pull it from new registry
++ Re-create registry using a bind mount and see how it stores data
+
+### Registry and Proper TLS
+
++ "Security by Default": Docker won't talk to registry without HTTPS
++ except, localhost (127.0.0.0/8)
++ for remote self-signed TLS, enable "insecure-registry" in engine
+
+
+> docker container -d -p 5000:5000 --name registry registry
+> docker pull hello-world
+> docker tag hello-world  127.0.0.1:5000/hello-world
+> docker push  127.0.0.1:5000/hello-world
+> docker image remove hello-world
+> docker image remove  127.0.0.1:5000/hello-world
+> docker pull  127.0.0.1:5000/hello-world
+> docker container kill registory
+> docker container rm registory
+
+> docker container -d -p 5000:5000 --name registry -v $(pwd)/registory-data:/var/lib/registory registry
+
+### Private Docker registry with Swarm
+
+
