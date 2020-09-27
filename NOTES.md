@@ -140,6 +140,19 @@ What happened?
   + Container-to-container in a Overlay network(uses VIP)
   + External traffic incoming to published pots(all nodes listen)
 
+## Stacks 
+
+Stacks: Production grade compose
+
++ In 1.13 Docker adds a new layer of abstraction to Swarm called Stacks
++ Stacks accept Compose files as their declarative definition for services, networks, and volumes
++ We use docker stack deploy rather then docker service create 
++ Stacks manage all these objects for us, including overlay network per stack, Adds stack name to start of their name
++ New deploy: key in Compose file: Can't do build:
++ Compse now ignores deploy: Swarm ignores build:
++ docker-compose cli not needed on Swarm server
+
+> docker stack deploy -c example-voting-app-stack.yml voteapp
 
 
 ## Container Registries Image Storage and Distribution
@@ -204,5 +217,4 @@ What happened?
 > docker container -d -p 5000:5000 --name registry -v $(pwd)/registory-data:/var/lib/registory registry
 
 ### Private Docker registry with Swarm
-
 
