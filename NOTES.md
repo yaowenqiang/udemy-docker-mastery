@@ -154,6 +154,37 @@ Stacks: Production grade compose
 
 > docker stack deploy -c example-voting-app-stack.yml voteapp
 
+> 5000
+> 5001
+> 8080
+
+
+## Secrets Storage
+
++ Supports generic strings or binary content up to 500kb in size
++ Doesn't require apps to be rewritten
+
+
+### Secret Storage cont.
+
++ As of Docker 1.13.0 Swarm Raft DB is encrypted on disk
++ Only stored on disk on Manager nodes
++ Default is Managers and Workers "control plane" is TLS + Mutual Auth
++ Secrets are first stored in Swarm, then assigned to a Service(s)
++ Only containers in assigned Service(s) can see them
++ They look like files in container but are actually in-memory fs
+> Local docker-compose can use file-based secrets, but not secure
+
+
+> docker secret create psql_user psql_user.txt
+> echo "myDBpassWORD" | docker secret create psql_pass -
+> docker secret ls
+> docker service create --name psql --secret pslq_user --secret psql_pass -e POSTGRES_PASSWORD_FILE=/run/secrets/psql_pass -e POSTGRES_USER_FILE=/run/secrets/psql_user postgres
+> docker service update --secret-rm
+
+> /run/secrets/<secret_name> or
+> /run/secrets/<secret_alias>
+
 
 ## Container Registries Image Storage and Distribution
 
