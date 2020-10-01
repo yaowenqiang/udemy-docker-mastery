@@ -49,7 +49,3 @@ COPY package.json package.json
 RUN npm install  && npm cache clean
 COPY . .
 CMD ["tini", "--", "node" , "./bin/www"]
-
-
-
-RUN 
