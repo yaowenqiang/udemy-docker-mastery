@@ -48,6 +48,58 @@
 
 > copy on write
 
+> docker image inspect  mysql
+
+
+## Custom Image
+
+Extends official image
+
+
+##  Container Lifetime & Persistent Data
+
++ Volumes: make special location outside of container UFS
++ Bind Mounts: link container path to host path
+
+### Persistent Data: Volumes
+
+VOLUME command in Dockerfile
+
+> mysql dockerfile
+> https://github.com/docker-library/mysql/blob/285fd39122e4b04fbe18e464deb72977df9c6a45/8.0/Dockerfile
+
+> docker run --rm -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql
+> docker volume ls
+> docker volume inspect minikube
+
+### named volume
+
+> docker run --rm -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=true  -v mysql-db:/var/lib/mysql mysql
+
+> docker volume create -d 
+
+
+
+> docker volume prume
+
+### Persistent Data: Bind Mounting
+
++ Maps a host file or directory to a container file or directory
+＋Basically just two locations pointing to the same file(s)
++ Again, Skip UFS, and host files overwrite any in container
++ Can't use in Dockerfile, must be at container run
++ ... run -v /Users/bret/stuff:/path/container(mac/Linux)
++ ... run -v //c/Users/bret/stuff:/path/container(Windows)
+
+
+> docker run -p 8885:80 -v $(pwd):/site bretfisher/jekyll-server
+
+
+
+### 
+
+
+
 
 # Docker Swarm
 
@@ -122,6 +174,8 @@ What happened?
 > docker network create --driver overlay mydrupal
 > docker service create --name psql --network mydrupal -e  POSTGRES_PASSWORD=mypass postgres
 > docker service create --name drupal --network mydrupal -p 80:80 drupal
+> docker service create --name adminer --network mydrupal -p 8080:8800 adminer
+
 > watch docker service ls
 
 >   "registry-mirrors": ["https://dt0991li.mirror.aliyuncs.com"]
